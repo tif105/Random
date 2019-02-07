@@ -1,37 +1,55 @@
-<!-- christopher Watson -->
+<!-- Christopher Watson-->
+<HTML><head><title> SnowScene</title>
+</head>
+<body><SVG id="svg" width="800" height="800" ></SVG></body>
+<script>
 
-<HTML><head><title> CSV</title></head>
-    <body>
-        <svg width="800" height="400" id="svg" onmousemove="update(event)" onclick="logout(event)">
-            <rect height="800" width="800" fill="pink" />
-            <circle id="circle" cx="50" cy="50" r="40" stroke="purple" stroke-width="20" fill="pink" />
-            <polygon id="polygon" fill="red" points= "0,0,20,10,100,0"/>
-    
-    
-        </svg>
-    
-    </body>
-    
-    <script>
-        document.getElementById('circle');
-        function update(event){
-            var x = event.clientX;
-            var y = event.clientY;
-            circle.setAttribute("cx",x);
-            circle.setAttribute("cy",y);
-    
-            
-    
+    function makecircle(index){circHTML=`<circle r="3" fill="white" id="circle`+index+`"/>`; return circHTML;}
+    function circlepos(){
+        this.posx=(Math.random())*800;
+        this.posy=(Math.random())*800;
+    }
+    svgHTML=`<rect width="800", height="800" fill="black" />`
+    for(i=0;i<100;i++){
+        svgHTML+=makecircle(i);
+    }
+    svgHTML+='<polygon id="ship"  fill="green"/>'
+    svg=document.getElementById('svg');
+    svg.innerHTML=svgHTML;
+    ship=document.getElementById('ship');
+    var shipx=0;
+    var shipy=750;
+
+    svg.addEventListener('mousemove',function(event){
+        shipx=event.clientX;
+    });
+
+    var circle = [];
+
+    for(i=0;i<100;i++){
+        circle[i]=document.getElementById('circle'+i+'');
+        circlepos[i]= new circlepos();
+    }
+    setInterval(function(){
+        for(i=0;i<100;i++){
+            circle[i].setAttribute("cx", circlepos[i].posx); circle[i].setAttribute("cy", circlepos[i].posy);
+
+            if (circlepos[i].posy<800){
+                circlepos[i].posy+=1;
+            }else{
+                circlepos[i].posy=0;
+                circlepos[i].posx=Math.random()*800;
+            }
+            shiplx=shipx-25; shipmx=shipx; shiprx=shipx+25
+            points = shiplx+','+775+','+shipmx+','+700+','+shiprx+','+775;
+            ship.setAttribute("points", points);
         }
+        
+    }, 16);
+
+</script>
     
-        function logout(event){
-            var clickx= event.clientX;
-            var clicky= event.clientY;
-            console.log(clickx+":"+clicky);
-    
-        }
-    </script>
-    
-    
-    
-    </HTML>
+
+
+
+</HTML>
