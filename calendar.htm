@@ -98,8 +98,105 @@
 </html>
 
 <script>
-    month="August"
-    monthel = document.getElementById('Month');
+    function daysinmonth(date){
+        console.log(date);
+        return new Date(date.getFullYear(),date.getMonth()+1, 0).getDate();
+    }
+    function firstdayofmonth(date){
+        date.setDate(1);
+        return date.getDay();
+    }
+
+    function refreshcalendar(){
+        var monthn =date.getMonth();
+        
+
+        switch (monthn){
+            case 0:
+                monthel.innerHTML="January";
+                break;
+            case 1:
+                monthel.innerHTML="February";
+                break;
+            case 2:
+                monthel.innerHTML="March";
+                break;
+            case 3:
+                monthel.innerHTML="April";
+                break;
+            case 4:
+                monthel.innerHTML="May";
+                break;
+            case 5:
+                monthel.innerHTML="June";
+                break;
+            case 6:
+                monthel.innerHTML="July";
+                break;
+            case 7:
+                monthel.innerHTML="August";
+                break;
+            case 8:
+                monthel.innerHTML="September";
+                break;
+            case 9:
+                monthel.innerHTML="October";
+                break;
+            case 10:
+                monthel.innerHTML="November";
+                break;
+            case 11:
+                monthel.innerHTML="December";
+                break;
+        }
+        daysThisMonth=daysinmonth(date);
+        firstDayOfmMnth=firstdayofmonth(date);
+
+        console.log(daysThisMonth);
+        console.log(firstDayOfmMnth);
+    }
+    date=new Date();
+    monthel=document.getElementById('Month');
     monthel.innerHTML=month;
+    nextbutton=document.getElementById('nextarrow');
+    lastbutton=document.getElementById('lastarrow');
+    refreshcalendar();
+
+    nextbutton.addEventListener('click', function(){
+        var monthn=date.getMonth();
+        var year=date.getFullYear();
+        
+        if(monthn<11){monthn++;}else{
+            
+            
+            monthn=0;
+            year++
+        }
+ 
+        date.setMonth(monthn); date.setFullYear(year);
+        console.log(year);
+        refreshcalendar();
+    })
+
+
+    lastbutton.addEventListener('click', function(){
+        var monthn=date.getMonth();
+        var year=date.getFullYear();
+        
+        if(monthn<11){monthn--;}else{
+            
+            
+            monthn=1;
+            year--;
+        }
+ 
+        date.setMonth(monthn); date.setFullYear(year);
+        date.setDate(1)
+        console.log(year);
+        refreshcalendar();
+    })
+
+
+
 
 </script>
