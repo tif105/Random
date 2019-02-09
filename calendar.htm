@@ -295,10 +295,15 @@
                     console.log(actualday);
                     year=date.getFullYear();
                     month=(date.getMonth()+1);
+                    monthstr=month
+                    if(monthstr<10){monthstr="0"+monthstr};
+                    daystr=actualday;
+                    if(daystr<10){daystr="0"+daystr};
                     document.getElementById('form').innerHTML=`
                      <button id="clbutton" onclick="document.getElementById('form').style.display='none'; ">x</button>
                     <p>
-                        `+year+`-`+month+`-`+actualday+`<br>
+                        
+                        <input type="date" value="`+year+`-`+monthstr+`-`+daystr+`"><br>
                         Description: <input type="text" id="descrption">
                     </p>
                     `;
