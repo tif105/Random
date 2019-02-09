@@ -14,6 +14,7 @@
                     color: white;
                     width : 1000px;
                     text-align : center;
+                    height : 130px;
                 }
 
                 #month ul {
@@ -38,7 +39,7 @@
                 }
 
                 #days {
-                    background-color: #ff3314;
+
                     color : white;
                     width: 1000px;
                 }
@@ -117,7 +118,6 @@
 <script>
     var calsvg=document.getElementById('Calendar').innerHTML;
     function daysinmonth(date){
-        console.log(date);
         return new Date(date.getFullYear(),date.getMonth()+1, 0).getDate();
     }
     function firstdayofmonth(date){
@@ -172,14 +172,12 @@
         daysThisMonth=daysinmonth(date);
         firstDayOfmMnth=firstdayofmonth(date);
         yearel.innerHTML=date.getFullYear();
-        console.log(daysThisMonth);
-        console.log(firstDayOfmMnth);
+
 
         for (i=0; i<daysThisMonth; i++){
 	        day=i+firstDayOfmMnth-1
 	        actualday=i+1;
             svg+='<text x="'+getxcoord(day)+'%" y="'+(getycoord(day)+2)+'%" fill="black">'+actualday+'</text>'
-            console.log("x",getxcoord(day),"y",getycoord(day));
             document.getElementById('Calendar').innerHTML=svg;
         }
     }
@@ -193,6 +191,14 @@
     function getycoord(day){
         y=(Math.floor(day/7));
         return (y)*20;
+    }
+
+    function pixelstopercentagex(pixels){
+        return pixels/1000*100;
+
+    }
+    function pixelstopercentagey(pixels){
+        return pixels/800*100;
     }
 
     date=new Date();
@@ -212,7 +218,6 @@
         }
  
         date.setMonth(monthn); date.setFullYear(year);
-        console.log(year);
         refreshcalendar();
     })
 
@@ -230,9 +235,23 @@
  
         date.setMonth(monthn); date.setFullYear(year);
         date.setDate(1)
-        console.log(year);
         refreshcalendar();
     })
+
+    document.getElementById('Calendar').addEventListener('click', function (event){
+        clickxperc=pixelstopercentagex(event.offsetX); clickyperc= pixelstopercentagey(event.offsetY);
+        for (i=0; i<daysThisMonth; i++){
+	        day=i+firstDayOfmMnth-1
+            xp1=getxcoord(day); yp1=getycoord(day); xp2=getxcoord(day)+14.28571428571429; yp2=getycoord(day)+20;
+            actualday=i+1;
+            if (clickxperc>xp1 && clickxperc < xp2 && clickyperc>yp1 && clickyperc<yp2){
+                console.log(actualday);
+            }
+            
+        }
+
+    });
+
 
 
 
