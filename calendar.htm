@@ -177,18 +177,22 @@
 
         for (i=0; i<daysThisMonth; i++){
 	        day=i+firstDayOfmMnth-1
-	        x=(day%7);
-	        y=(Math.floor(day/7));
 	        actualday=i+1;
-            console.log("x",x,"y",y);
-            xcoord=x*14.28571428571429;
-            ycoord=(y+1)*20;
-            console.log(xcoord);
-            svg+='<text x="'+xcoord+'%" y="'+ycoord+'%" fill="black">'+actualday+'</text>'
-            
+            svg+='<text x="'+getxcoord(day)+'%" y="'+(getycoord(day)+2)+'%" fill="black">'+actualday+'</text>'
+            console.log("x",getxcoord(day),"y",getycoord(day));
             document.getElementById('Calendar').innerHTML=svg;
         }
-        console.log(svg);
+    }
+
+
+    function getxcoord(day){
+        x=(day%7);
+        return x*14.28571428571429;
+    }
+
+    function getycoord(day){
+        y=(Math.floor(day/7));
+        return (y)*20;
     }
 
     date=new Date();
@@ -203,8 +207,6 @@
         var year=date.getFullYear();
         
         if(monthn<11){monthn++;}else{
-            
-            
             monthn=0;
             year++
         }
