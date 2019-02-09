@@ -61,7 +61,7 @@
         
         <div id="month">
             <ul class="monthbar">
-                
+                <li class="year" id="year">2019</li>
                 <li class="next" id="nextarrow">&#8250;</li>
                 <li class="last" id="lastarrow">&#8249;</li>
                 <li class="month" id="Month"></li>
@@ -151,15 +151,16 @@
         }
         daysThisMonth=daysinmonth(date);
         firstDayOfmMnth=firstdayofmonth(date);
-
+        yearel.innerHTML=date.getFullYear();
         console.log(daysThisMonth);
         console.log(firstDayOfmMnth);
     }
+
     date=new Date();
     monthel=document.getElementById('Month');
-    monthel.innerHTML=month;
     nextbutton=document.getElementById('nextarrow');
     lastbutton=document.getElementById('lastarrow');
+    yearel=document.getElementById('year');
     refreshcalendar();
 
     nextbutton.addEventListener('click', function(){
