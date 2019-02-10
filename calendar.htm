@@ -15,6 +15,8 @@
                     width : 1000px;
                     text-align : center;
                     height : 130px;
+                    border-top-left-radius : 10px;
+                    border-top-right-radius : 10px;
                 }
 
                 #month ul {
@@ -59,10 +61,10 @@
 
                 #form {
                     width : 980px;;
-                    height : 1000px;
+                    height : 500px;
                     position : fixed;
-                    top : 0px;
-                    background :rgba(253, 185, 186, 0.87);
+                    top : 180px;
+                    background : rgba(233, 200, 200, 0.98);
                     left : 15px;
                     
 
@@ -73,8 +75,17 @@
                 #clbutton{
                     background : none;
                     border-style : solid;
-                    border-color : black;
+                    border-color : white;
+                    color : white;
 
+                }
+                .arrowbutton{
+                    background : none;
+                    border-style : none;
+                    font-size: 36px;
+                    color : white;
+                    border-radius : 10px;
+                    
                 }
 
                 
@@ -89,8 +100,8 @@
             <div id="month">
                 <ul class="monthbar">
                     <li class="year" id="year">2019</li>
-                    <li class="next" id="nextarrow">&#8250;</li>
-                    <li class="last" id="lastarrow">&#8249;</li>
+                    <li class="next"><button id="nextarrow" class="arrowbutton">&#8250;</button></li>
+                    <li class="last" ><button id="lastarrow" class="arrowbutton">&#8249;</button></li>
                     <li class="month" id="Month"></li>
                 </ul>
                 <ul class="daysofweek">
@@ -131,7 +142,7 @@
         </div>
 
         <div id="form">stuff</div>
-        
+
         
     </body>
 
@@ -194,7 +205,6 @@
         daysThisMonth=daysinmonth(date);
         firstDayOfmMnth=firstdayofmonth(date);
         yearel.innerHTML=date.getFullYear();
-        console.log(firstDayOfmMnth);
         if (firstDayOfmMnth==0){firstDayOfmMnth=7};
 
         for (i=0; i<daysThisMonth; i++){
@@ -303,9 +313,19 @@
                     document.getElementById('form').innerHTML=`
                      <button id="clbutton" onclick="document.getElementById('form').style.display='none'; ">x</button>
                     <p>
-                        
-                        <input type="date" value="`+year+`-`+monthstr+`-`+daystr+`"><br>
-                        Description: <input type="text" id="descrption">
+                        <table>
+                            <tr>
+                                <td>Start date:</td>
+                                <td><input type="date" value="`+year+`-`+monthstr+`-`+daystr+`"></td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td><button>submit</button></td>
+                            </tr>
+                        </table>
                     </p>
                     `;
                     
