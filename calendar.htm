@@ -119,11 +119,11 @@
                 <line x1=85.71428571% y1="0" x2=85.71428571% y2=100% style="stroke:black;" />
                 <line x1=100% y1="0" x2=100% y2=100% style="stroke:black;" />
                 <!--                      diagonal dividers                  -->
-                <line x1=0% y1="20%" x2=100% y2=20% style="stroke:black;" />
-                <line x1=0% y1="40%" x2=100% y2=40% style="stroke:black;" />
-                <line x1=0% y1="60%" x2=100% y2=60% style="stroke:black;" />
-                <line x1=0% y1="80%" x2=100% y2=80% style="stroke:black;" />
-                <line x1=0% y1="100%" x2=100% y2=100% style="stroke:black;" />
+                <line x1=0% y1="16.66667%" x2=100% y2=16.66667% style="stroke:black;" />
+                <line x1=0% y1="33.33334%" x2=100% y2=33.33334% style="stroke:black;" />
+                <line x1=0% y1="50.00001%" x2=100% y2=50.00001% style="stroke:black;" />
+                <line x1=0% y1="66.66668%" x2=100% y2=66.66668% style="stroke:black;" />
+                <line x1=0% y1="83.33335%" x2=100% y2=83.33335% style="stroke:black;" />
 
             </SVG>
                 
@@ -194,7 +194,8 @@
         daysThisMonth=daysinmonth(date);
         firstDayOfmMnth=firstdayofmonth(date);
         yearel.innerHTML=date.getFullYear();
-
+        console.log(firstDayOfmMnth);
+        if (firstDayOfmMnth==0){firstDayOfmMnth=7};
 
         for (i=0; i<daysThisMonth; i++){
 	        day=i+firstDayOfmMnth-1
@@ -212,7 +213,7 @@
 
     function getycoord(day){
         y=(Math.floor(day/7));
-        return (y)*20;
+        return (y)*16.66666666666667;
     }
 
     function pixelstopercentagex(pixels){
@@ -236,11 +237,11 @@
                 <line x1=85.71428571% y1="0" x2=85.71428571% y2=100% style="stroke:black;" />
                 <line x1=100% y1="0" x2=100% y2=100% style="stroke:black;" />
                 <!--                      diagonal dividers                  -->
-                <line x1=0% y1="20%" x2=100% y2=20% style="stroke:black;" />
-                <line x1=0% y1="40%" x2=100% y2=40% style="stroke:black;" />
-                <line x1=0% y1="60%" x2=100% y2=60% style="stroke:black;" />
-                <line x1=0% y1="80%" x2=100% y2=80% style="stroke:black;" />
-                <line x1=0% y1="100%" x2=100% y2=100% style="stroke:black;" />
+                <line x1=0% y1="16.66667%" x2=100% y2=16.66667% style="stroke:black;" />
+                <line x1=0% y1="33.33334%" x2=100% y2=33.33334% style="stroke:black;" />
+                <line x1=0% y1="50.00001%" x2=100% y2=50.00001% style="stroke:black;" />
+                <line x1=0% y1="66.66668%" x2=100% y2=66.66668% style="stroke:black;" />
+                <line x1=0% y1="83.33335%" x2=100% y2=83.33335% style="stroke:black;" />
 
             </SVG>
         `;
@@ -289,7 +290,7 @@
             clickxperc=pixelstopercentagex(event.offsetX); clickyperc= pixelstopercentagey(event.offsetY);
             for (i=0; i<daysThisMonth; i++){
                 day=i+firstDayOfmMnth-1
-                xp1=getxcoord(day); yp1=getycoord(day); xp2=getxcoord(day)+14.28571428571429; yp2=getycoord(day)+20;
+                xp1=getxcoord(day); yp1=getycoord(day); xp2=getxcoord(day)+14.28571428571429; yp2=getycoord(day)+16.66666666666667;
                 actualday=i+1;
                 if (clickxperc>xp1 && clickxperc < xp2 && clickyperc>yp1 && clickyperc<yp2){
                     console.log(actualday);
