@@ -1,0 +1,5 @@
+//essential one line problem solving functions
+//wrap value to min and max to spin like a rotor
+function wrapValue(max,min,x){x = (((x - min) % (max - min)) + (max - min)) % (max - min) + min;return x}
+//wrap value to min and max to spin like a rotor
+function mergeArray(arrinput){output="";for(x=0;x<(arrinput.length);x++){output+=arrinput[x];}return output;}
