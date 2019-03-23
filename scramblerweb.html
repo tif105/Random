@@ -7,7 +7,7 @@
     <table>
         <tr>
             <td>KEY</td>
-            <td><input type="text" id="keyfield" maxlength=4 /></td> 
+            <td><input type="text" id="keyfield" maxlength=12 /></td> 
         </tr>
         <tr>
             <td>Input</td>
@@ -29,7 +29,15 @@
 
 <script>
 
-function wrapvalue(max,min,x){x = (((x - min) % (max - min)) + (max - min)) % (max - min) + min;return x}
+function wrapvalue(max,min,x){
+    while(x>max){
+        x-=max;
+    }
+    while(x<min){
+        x+=max;
+    }
+    return x;
+}
 
 function mergearray(arrinput){output="";for(x=0;x<(arrinput.length);x++){output+=arrinput[x];}return output;}
 
@@ -191,9 +199,5 @@ descramblebutton.addEventListener('click',() => {
     
     outputfield.value=mergearray(inputarr);
 });
-
-
-
-
 
 </script>
