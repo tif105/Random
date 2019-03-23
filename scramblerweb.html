@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<head>
+<title>Scrambler</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>KEY</td>
+            <td><input type="text" id="keyfield" maxlength=4 /></td> 
+        </tr>
+        <tr>
+            <td>Input</td>
+            <td><input type="text" id="input" /></td>
+        </tr>
+        <tr>
+            <td>Output</td>
+            <td><input type="text" id="output" /></td>
+        </tr>
+        <tr>
+            <td><button type="button" id="scramblebutton">Scramble</button></td>
+            <td><button type="button" id="descramblebutton">De-Scramble</button></td>
+        </tr>
+
+    </table>
+</body>
+
+</head>
+
+<script>
+
+function wrapvalue(max,min,x){x = (((x - min) % (max - min)) + (max - min)) % (max - min) + min;return x}
+
+function mergearray(arrinput){output="";for(x=0;x<(arrinput.length);x++){output+=arrinput[x];}return output;}
+
+function numberisechar(char){
+    input=char.toLowerCase();
+    output=26;
+    switch (input) {
+        case " " : output=0; break;
+        case "a" : output=1; break; 
+        case "b" : output=2; break; 
+        case "c" : output=3; break; 
+        case "d" : output=4; break;
+        case "e" : output=5; break;
+        case "f" : output=6; break;
+        case "g" : output=7; break;
+        case "h" : output=8; break;
+        case "i" : output=9; break;
+        case "j" : output=10; break;
+        case "k" : output=11; break;
+        case "l" : output=12; break;
+        case "m" : output=13; break;
+        case "n" : output=14; break;
+        case "o" : output=15; break;
+        case "p" : output=16; break;
+        case "q" : output=17; break;
+        case "r" : output=18; break;
+        case "s" : output=19; break;
+        case "t" : output=20; break;
+        case "u" : output=21; break;
+        case "v" : output=22; break;
+        case "x" : output=23; break;
+        case "y" : output=24; break;
+        case "x" : output=24; break;
+        case "z" : output=25; break;
+        
+    }
+    return output;
+}
+
+function denumberisechar(char){
+    output=" ";
+    switch (char) {
+        case 0 : output=" "; break;
+        case 1 : output="a"; break; 
+        case 2 : output="b"; break; 
+        case 3 : output="c"; break; 
+        case 4 : output="d"; break;
+        case 5 : output="e"; break;
+        case 6 : output="f"; break;
+        case 7 : output="g"; break;
+        case 8 : output="h"; break;
+        case 9 : output="i"; break;
+        case 10 : output="j"; break;
+        case 11 : output="k"; break;
+        case 12 : output="l"; break;
+        case 13 : output="m"; break;
+        case 14 : output="n"; break;
+        case 15 : output="o"; break;
+        case 16 : output="p"; break;
+        case 17 : output="q"; break;
+        case 18 : output="r"; break;
+        case 19 : output="s"; break;
+        case 20 : output="t"; break;
+        case 21 : output="u"; break;
+        case 22 : output="v"; break;
+        case 23 : output="x"; break;
+        case 24 : output="y"; break;
+        case 25 : output="z"; break;
+        
+    }
+    return output;
+}
+
+function numberisechararr(chararr){
+    outputarr=[];
+    for (x=0;x<chararr.length;x++){
+        outputarr[x]=numberisechar(chararr[x]);
+    }
+    return outputarr;
+}
+
+function denumberisechararr(chararr){
+    outputarr=[];
+    for (x=0;x<chararr.length;x++){
+        outputarr[x]=denumberisechar(chararr[x]);
+    }
+    return outputarr;
+}
+
+function cypher(numbarr,key){
+    outputarr=[]
+    y=0;
+    for (x=0; x<numbarr.length; x++){
+        keyn=Number(key[y])
+        console.log(`Orignal:  ${numbarr[x]} + key: ${key[y]} `)
+        
+        outputarr[x]=wrapvalue(26,0,numbarr[x]+keyn);
+        
+        console.log(`result: ${outputarr[x]}`)
+        
+        y++
+        if (y>key.length-1){
+            y=0;
+        }
+    }
+
+    return outputarr;
+}
+
+function decypher(numbarr,key){
+    outputarr=[];
+    y=0;
+    for (x=0; x<numbarr.length; x++){
+        keyn=Number(key[y])
+        outputarr[x]=wrapvalue(26,0,numbarr[x]-keyn);
+        y++
+        if (y>key.length-1){
+            y=0;
+        }
+    }
+
+    return outputarr;
+}
+
+inputfield= document.getElementById('input');
+outputfield=document.getElementById('output');
+scramblebutton=document.getElementById('scramblebutton');
+descramblebutton=document.getElementById('descramblebutton');
+
+scramblebutton.addEventListener('click',() => {
+    input = inputfield.value;
+    inputarr=input.split('');
+    inputarr=numberisechararr(inputarr);
+    
+    
+    keyfieldval=document.getElementById('keyfield').value;
+    key=keyfieldval.split('');
+
+    // our scrambling code
+    inputarr=cypher(inputarr,key);
+    inputarr=denumberisechararr(inputarr);
+    
+    outputfield.value=mergearray(inputarr);
+});
+
+descramblebutton.addEventListener('click',() => {
+    input = inputfield.value;
+    inputarr=input.split('');
+    inputarr=numberisechararr(inputarr);
+    
+    
+    keyfieldval=document.getElementById('keyfield').value;
+    key=keyfieldval.split('');
+
+    // our scrambling code
+    inputarr=decypher(inputarr,key);
+    inputarr=denumberisechararr(inputarr);
+    output=mergearray(inputarr);
+    
+    outputfield.value=mergearray(inputarr);
+});
+
+
+
+
+
+</script>
